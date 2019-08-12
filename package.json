@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "text-encoder-lite": "^2.0.0"
+  }
+}
