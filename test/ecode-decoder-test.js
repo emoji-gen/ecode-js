@@ -12,6 +12,7 @@ describe('EcodeDecoder', () => {
       expect(ecode.locale).to.equal('en')
       expect(ecode.align).to.equal('center')
       expect(ecode.size).to.equal('xhdpi')
+      expect(ecode.format).to.equal('WebP')
     })
   })
 })

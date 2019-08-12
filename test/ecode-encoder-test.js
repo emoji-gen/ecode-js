@@ -22,6 +22,8 @@ describe('EcodeEncoder', () => {
         text: 'ab\nc',
       })
 
+      console.log('code=' + ecode) // => 'BA0hzxI0VniavN7wYWIKYw'
+
       const buffer = [...Buffer.from(ecode, 'base64')]
       expect(buffer).to.deep.equals([
         0x04, // Version:4, Locale:4
