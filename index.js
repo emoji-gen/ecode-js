@@ -1,6 +1,6 @@
 'use strict'
 
-const EcodeEncoder = require('./lib/ecode-encoder')
+var EcodeEncoder = require('./lib/ecode-encoder')
 
 module.exports = {
   EcodeEncoder: EcodeEncoder,

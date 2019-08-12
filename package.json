@@ -1,5 +1,18 @@
 {
+  "name": "@emoji-gen/ecode",
+  "version": "0.1.0",
+  "description": "The emoji code utilities for JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
   "dependencies": {
-    "text-encoder-lite": "^2.0.0"
-  }
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0"
+  },
+  "author": "Emoji Generator <ultimate.emoji.gen@gmail.com>",
+  "repository": "https://github.com/emoji-gen/ecode-js.git",
+  "license": "MIT"
 }
