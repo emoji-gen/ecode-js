@@ -1,0 +1,10 @@
+dist: bionic
+language: node_js
+node_js:
+  - 10
+  - 12
+  - stable
+
+script:
+  - travis_retry npm test
+
