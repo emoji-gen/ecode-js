@@ -8,7 +8,7 @@ const del = require('del')
 
 const configs = require('./configs')
 
-del.sync([ join(__dirname, '..', 'dist') ])
+del.sync([ join(__dirname, '../dist') ], { force: true })
 build(configs)
 
 async function build(configs) {
