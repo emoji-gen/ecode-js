@@ -7,6 +7,10 @@
   "module": "dist/ecode.esm.js",
   "unpkg": "dist/ecode.js",
   "jsdelivr": "dist/ecode.js",
+  "files": [
+    "dist",
+    "lib"
+  ],
   "scripts": {
     "test": "run-s test:*",
     "test:mocha": "nyc mocha",
