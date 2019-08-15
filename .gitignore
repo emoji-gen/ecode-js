@@ -4,7 +4,7 @@ npm-debug.log*
 
 # Yarn
 yarn.lock
-yarn-error.txt
+yarn-error.log
 
 # nyc
 .nyc_output/
