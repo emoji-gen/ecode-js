@@ -15,7 +15,8 @@
     "karma-chrome-launcher": "^3.0.0",
     "karma-mocha": "^1.3.0",
     "karma-webpack": "^4.0.2",
-    "mocha": "^6.2.0"
+    "mocha": "^6.2.0",
+    "webpack": "^4.39.2"
   },
   "author": "Emoji Generator <ultimate.emoji.gen@gmail.com>",
   "repository": "https://github.com/emoji-gen/ecode-js.git",
