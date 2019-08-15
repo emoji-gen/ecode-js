@@ -9,7 +9,19 @@
 - Node v10 or later
 - Modern browsers
   - Internet Explorer 11 is supported
-  
+
+## Development
+### Test
+
+```
+$ yarn test
+```
+
+### Build
+
+```
+$ yarn run build
+```
 
 ## License
 MIT &copy; [Emoji Generator](https://emoji-gen.ninja)
