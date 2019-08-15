@@ -20,6 +20,14 @@ module.exports = function(config) {
     autoWatch: false,
     webpack: {
       mode: 'development',
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            loader: 'babel-loader',
+          },
+        ],
+      },
       resolve: {
         extensions: ['.js', '.json'],
       },

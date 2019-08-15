@@ -12,6 +12,10 @@
     "text-encoder-lite": "^2.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
     "karma": "^4.2.0",
     "karma-chrome-launcher": "^3.0.0",
