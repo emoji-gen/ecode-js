@@ -1,6 +1,7 @@
 dist: bionic
 language: node_js
 node_js:
+  - 1
   - 12
   - stable
 
