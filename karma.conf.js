@@ -24,7 +24,7 @@ module.exports = function(config) {
         extensions: ['.js', '.json'],
       },
     },
-    browsers: ['ChromeHeadless'],
+    browsers: [ process.env.APPVEYOR ? 'IE' : 'ChromeHeadless' ],
     singleRun: true,
     concurrency: 1,
   })
