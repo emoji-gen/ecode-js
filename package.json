@@ -6,7 +6,8 @@
   "scripts": {
     "test": "run-s test:*",
     "test:mocha": "nyc mocha",
-    "test:karma": "karma start"
+    "test:karma": "karma start",
+    "build": "node build/build.js"
   },
   "dependencies": {
     "text-encoder-lite": "^2.0.0"
