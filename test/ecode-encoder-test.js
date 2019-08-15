@@ -26,7 +26,7 @@ describe('EcodeEncoder', () => {
 
       const buffer =
         typeof window !== 'undefined' && typeof window.atob === 'function' ?
-          Array.prototype.slice.call(Uint8Array.from(window.atob(ecode), v => v.charCodeAt(0))) :
+          [].slice.call(window.atob(ecode)).map(v => v.charCodeAt(0)) :
           [...Buffer.from(ecode, 'base64')]
       expect(buffer).to.deep.equals([
         0x04, // Version:4, Locale:4
