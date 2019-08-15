@@ -24,7 +24,10 @@ describe('EcodeEncoder', () => {
 
       console.log('code=' + ecode) // => 'BA0hzxI0VniavN7wYWIKYw'
 
-      const buffer = [...Buffer.from(ecode, 'base64')]
+      const buffer =
+        typeof window !== 'undefined' && typeof window.atob === 'function' ?
+          Array.prototype.slice.call(Uint8Array.from(window.atob(ecode), v => v.charCodeAt(0))) :
+          [...Buffer.from(ecode, 'base64')]
       expect(buffer).to.deep.equals([
         0x04, // Version:4, Locale:4
         0x0d, // Flags:6, Align:2
