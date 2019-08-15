@@ -1,5 +1,7 @@
 'use strict'
 
+const { join } = require('path')
+
 const babel = require('rollup-plugin-babel')
 const node = require('rollup-plugin-node-resolve')
 const cjs = require('rollup-plugin-commonjs')
@@ -15,28 +17,28 @@ const banner =
 
 const entries = [
   {
-    output: `dist/ecode.js`,
+    output: join(__dirname, '../dist/ecode.js'),
     format: 'umd',
   },
   {
-    output: `dist/ecode.min.js`,
+    output: join(__dirname, '../dist/ecode.min.js'),
     format: 'umd',
   },
   {
-    output: `dist/ecode.common.js`,
+    output: join(__dirname, '../dist/ecode.common.js'),
     format: 'cjs',
   },
   {
-    output: `dist/ecode.esm.js`,
+    output: join(__dirname, '../dist/ecode.esm.js'),
     format: 'es',
   },
   {
-    output: `dist/ecode.esm.browser.js`,
+    output: join(__dirname, '../dist/ecode.esm.browser.js'),
     format: 'es',
     transpile: false,
   },
   {
-    output: `dist/ecode.esm.browser.min.js`,
+    output: join(__dirname, '../dist/ecode.esm.browser.min.js'),
     format: 'es',
     transpile: false,
   },
@@ -48,7 +50,7 @@ module.exports =
     if (entry.transpile !== false) {
       plugins.push(babel())
     }
-    if (entry.output.includes('.min.js')) {
+    if (entry.output.endsWith('.min.js')) {
       const terserOptions = {
         output: {
           comments: /^\**!|@preserve|@license|@cc_on/i,
@@ -59,7 +61,7 @@ module.exports =
 
     return {
       input: {
-        input: 'index.js',
+        input: join(__dirname, '../index.js'),
         plugins,
       },
       output: {
