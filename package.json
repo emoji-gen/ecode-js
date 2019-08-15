@@ -15,7 +15,8 @@
     "test": "run-s test:*",
     "test:mocha": "nyc mocha",
     "test:karma": "karma start",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "prepare": "run-s build"
   },
   "dependencies": {
     "text-encoder-lite": "^2.0.0"
