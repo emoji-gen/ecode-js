@@ -5,9 +5,10 @@
 
 
 ## Requirements
-- Node v12 or later
+- Node v10 or later
 - Modern browsers
-  - Internet Explorer is *not supported*
+  - Internet Explorer 11 is supported
+  
 
 ## License
 MIT &copy; [Emoji Generator](https://emoji-gen.ninja)
