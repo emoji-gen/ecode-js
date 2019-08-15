@@ -11,4 +11,5 @@ test_script:
   - npm test
 
 build: off
+shallow_clone: true
 
