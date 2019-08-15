@@ -10,6 +10,13 @@
 - Modern browsers
   - Internet Explorer 11 is supported
 
+## Getting started
+
+```bash
+$ yarn add @emoji-gen/ecode           # for Yarn users
+$ npm install @emoji-gen/ecode --save # for NPM users
+```
+
 ## Development
 ### Test
 
