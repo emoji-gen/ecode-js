@@ -4,6 +4,6 @@ const EcodeEncoder = require('./lib/ecode-encoder')
 const EcodeDecoder = require('./lib/ecode-decoder')
 
 module.exports = {
-  EcodeEncoder: EcodeEncoder,
-  EcodeDecoder: EcodeDecoder,
+  EcodeEncoder,
+  EcodeDecoder,
 }
