@@ -1,5 +1,8 @@
 # ecode-js
-:musical_score: The emoji code utilities for JavaScript
+[![Build Status](https://travis-ci.org/emoji-gen/ecode-js.svg?branch=master)](https://travis-ci.org/emoji-gen/ecode-js)
+
+> :musical_score: The emoji code utilities for JavaScript
+
 
 ## Requirements
 - Node v12 or later
