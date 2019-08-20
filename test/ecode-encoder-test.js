@@ -1,7 +1,7 @@
 'use strict'
 
 const { expect } = require('chai')
-const { EcodeEncoder } = require('..')
+const { EcodeEncoder } = require('../index')
 
 describe('EcodeEncoder', () => {
   describe('encodeV1', () => {

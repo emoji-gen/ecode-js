@@ -1,7 +1,7 @@
 'use strict'
 
 const { expect } = require('chai')
-const { EcodeDecoder } = require('..')
+const { EcodeDecoder } = require('../index')
 
 describe('EcodeDecoder', () => {
   describe('decode', () => {
@@ -16,7 +16,7 @@ describe('EcodeDecoder', () => {
       expect(ecode.fontId).to.equal(0xcf)
       expect(ecode.foregroundColor).to.equal(0x12345678)
       expect(ecode.backgroundColor).to.equal(0x9abcdef0)
-      // expect(ecode.text).to.equal('ab\nc')
+      expect(ecode.text).to.equal('ab\nc')
     })
   })
 })
