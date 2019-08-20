@@ -3,12 +3,13 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - npm install
+  - appveyor-retry npm install
 
 test_script:
   - node --version
   - npm --version
-  - npm test
+  - appveyor-retry npm test
+  - appveyor-retry npm run build
 
 build: off
 shallow_clone: true
