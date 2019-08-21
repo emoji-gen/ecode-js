@@ -20,5 +20,9 @@ describe('EcodeDecoder', () => {
       expect(ecode.backgroundColor.hex).to.equal('9abcdef0')
       expect(ecode.text).to.equal('ab\nc')
     })
+    it('should fail to decode due to illegal length', () => {
+      const ecodeDecoder = new EcodeDecoder()
+      expect(() => { ecodeDecoder.decode('') }).to.throw(Error)
+    })
   })
 })
