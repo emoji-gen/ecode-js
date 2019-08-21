@@ -32,7 +32,10 @@ const ecode = ecodeDecoder.decode('BA0hzxI0VniavN7wYWIKYw')
 console.log(ecode)
 // => {
 //      version: 1,
-//      locale: 'en',
+//      locale: {
+//        id: 4,
+//        name: 'en',
+//      },
 //      flags: {
 //         sizeFixed: false,
 //         stretch: true
