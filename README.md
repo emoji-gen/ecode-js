@@ -20,16 +20,48 @@ $ yarn add @emoji-gen/ecode           # for Yarn users
 $ npm install @emoji-gen/ecode --save # for NPM users
 ```
 
+## Usage
+
+```js
+const { EcodeDecoder } = require('@emoji-gen/ecode')
+
+const ecodeDecoder = new EcodeDecoder()
+const ecode = ecodeDecoder.decode('BA0hzxI0VniavN7wYWIKYw')
+
+console.log(ecode)
+// => {
+//      version: 1,
+//      locale: 'en',
+//      flags: {
+//         sizeFixed: false,
+//         stretch: true
+//      },
+//      align: 'center',
+//      size: 'xhdpi',
+//      format: 'WebP',
+//      fontId: 207,
+//      foregroundColor: {
+//        value: 305419896,
+//        hex: '12345678'
+//      },
+//      backgroundColor: {
+//        value: 2596069104,
+//        hex: '9abcdef0'
+//      },
+//      text: 'ab\nc'
+//    }
+```
+
 ## Development
 ### Test
 
-```
+```bash
 $ yarn test
 ```
 
 ### Build
 
-```
+```bash
 $ yarn run build
 ```
 
