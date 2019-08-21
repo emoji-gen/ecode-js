@@ -3,6 +3,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/4i9qw1phn1x8jl4c/branch/master?svg=true)](https://ci.appveyor.com/project/pine/ecode-js/branch/master)
 [![dependencies Status](https://david-dm.org/emoji-gen/ecode-js/status.svg)](https://david-dm.org/emoji-gen/ecode-js)
 [![devDependencies Status](https://david-dm.org/emoji-gen/ecode-js/dev-status.svg)](https://david-dm.org/emoji-gen/ecode-js?type=dev)
+[![codecov](https://codecov.io/gh/emoji-gen/ecode-js/branch/master/graph/badge.svg)](https://codecov.io/gh/emoji-gen/ecode-js)
 [![License](https://img.shields.io/static/v1?label=License&message=MIT&color=green)](https://opensource.org/licenses/MIT)
 
 > :musical_score: The emoji code utilities for JavaScript
