@@ -22,7 +22,7 @@ describe('EcodeDecoder', () => {
     })
     it('should fail to decode due to illegal length', () => {
       const ecodeDecoder = new EcodeDecoder()
-      expect(() => { ecodeDecoder.decode('') }).to.throw(Error)
+      expect(() => { ecodeDecoder.decode('') }).to.throw(Error, 'Illegal byte length 0')
     })
   })
 })
