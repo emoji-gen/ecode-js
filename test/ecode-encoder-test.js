@@ -13,9 +13,7 @@ describe('EcodeEncoder', () => {
         sizeFixed: true,
         stretch: true,
       },
-      align: {
-        name: 'center',
-      },
+      align: 'center',
       size: 'xhdpi',
       format: 'webp',
       fontId: 0xcf,
@@ -98,6 +96,16 @@ describe('EcodeEncoder', () => {
            align: 'XXX',
           }))
       }).to.throw(Error, 'Illegal align name : XXX')
+    })
+
+    it('should fail to encode ecode due to illegal size name', () => {
+      const ecodeEncoder = new EcodeEncoder()
+      expect(() => {
+        ecodeEncoder.encodeV1(
+          assign({}, TEMPLATE, {
+           size: 'XXX',
+          }))
+      }).to.throw(Error, 'Illegal size name : XXX')
     })
   })
 })
