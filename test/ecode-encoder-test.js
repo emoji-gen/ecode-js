@@ -2,13 +2,35 @@
 
 const { expect } = require('chai')
 const { EcodeEncoder } = require('../index')
+const base64 = require('../lib/base64')
 
 describe('EcodeEncoder', () => {
   describe('encodeV1', () => {
+    const TEMPLATE = {
+      locale: {
+        name: 'en',
+      },
+      flags: {
+        sizeFixed: true,
+        stretch: true,
+      },
+      align: {
+        name: 'center',
+      },
+      size: 'xhdpi',
+      format: 'webp',
+      fontId: 0xcf,
+      foregroundColor: 0x12345678,
+      backgroundColor: 0x9abcdef0,
+      text: 'ab\nc',
+    }
+
     it('should encode ecode', () => {
       const ecodeEncoder = new EcodeEncoder()
       const ecode = ecodeEncoder.encodeV1({
-        locale: 'en',
+        locale: {
+          name: 'en',
+        },
         flags: {
           sizeFixed: true,
           stretch: true,
@@ -24,10 +46,7 @@ describe('EcodeEncoder', () => {
 
       console.log('code=' + ecode) // => 'BA0hzxI0VniavN7wYWIKYw'
 
-      const buffer =
-        typeof window !== 'undefined' && typeof window.atob === 'function' ?
-          [].slice.call(window.atob(ecode)).map(v => v.charCodeAt(0)) :
-          [...Buffer.from(ecode, 'base64')]
+      const buffer = Array.prototype.slice.call(base64.decode(ecode))
       expect(buffer).to.deep.equals([
         0x04, // Version:4, Locale:4
         0x0d, // Flags:6, Align:2
@@ -46,6 +65,30 @@ describe('EcodeEncoder', () => {
         0x0a, // Text:8
         0x63, // Text:8
       ])
+    })
+
+    it('should fail to encode ecode due to illegal locale name', () => {
+      const ecodeEncoder = new EcodeEncoder()
+      expect(() => {
+        ecodeEncoder.encodeV1(
+          Object.assign({}, TEMPLATE, {
+            locale: {
+              name: 'XXX',
+            },
+          }))
+      }).to.throw(Error, 'Illegal locale name : XXX')
+    })
+
+    it('should fail to encode ecode due to illegal locale name', () => {
+      const ecodeEncoder = new EcodeEncoder()
+      expect(() => {
+        ecodeEncoder.encodeV1(
+          Object.assign({}, TEMPLATE, {
+            locale: {
+              name: 'XXX',
+            },
+          }))
+      }).to.throw(Error, 'Illegal locale name : XXX')
     })
   })
 })

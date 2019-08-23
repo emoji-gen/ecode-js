@@ -8,16 +8,13 @@ describe('EcodeDecoder', () => {
   describe('decode', () => {
     it('should decode ecode', () => {
       const ecodeDecoder = new EcodeDecoder()
-      const ecode = ecodeDecoder.decode('BA0hzxI0VniavN7wYWIKYw')
+      const ecode = ecodeDecoder.decodeV1('BA0hzxI0VniavN7wYWIKYw')
       expect(ecode.version).to.equal(1)
-      expect(ecode.locale.id).to.equal(4)
-      expect(ecode.locale.name).to.equal('en')
+      expect(ecode.locale).to.equal('en')
       expect(ecode.flags.sizeFixed).to.be.true;
       expect(ecode.flags.stretch).to.be.true;
-      expect(ecode.align.id).to.equal(1)
-      expect(ecode.align.name).to.equal('center')
-      expect(ecode.size.id).to.equal(2)
-      expect(ecode.size.name).to.equal('xhdpi')
+      expect(ecode.align).to.equal('center')
+      expect(ecode.size).to.equal('xhdpi')
       expect(ecode.format.id).to.equal(1)
       expect(ecode.format.name).to.equal('WebP')
       expect(ecode.fontId).to.equal(0xcf)
@@ -30,7 +27,7 @@ describe('EcodeDecoder', () => {
 
     it('should fail to decode due to illegal length', () => {
       const ecodeDecoder = new EcodeDecoder()
-      expect(() => { ecodeDecoder.decode('') }).to.throw(Error, 'Illegal byte length 0')
+      expect(() => { ecodeDecoder.decodeV1('') }).to.throw(Error, 'Illegal byte length 0')
     })
 
     it('should fail to decode due to illegal version', () => {
@@ -53,7 +50,7 @@ describe('EcodeDecoder', () => {
         0x0a, // Text:8
         0x63, // Text:8
       ])
-      expect(() => { ecodeDecoder.decode(ecode) }).to.throw(Error, 'Illegal version 16')
+      expect(() => { ecodeDecoder.decodeV1(ecode) }).to.throw(Error, 'Illegal version 16')
     })
 
     it('should fail to decode due to illegal locale ID', () => {
@@ -76,7 +73,7 @@ describe('EcodeDecoder', () => {
         0x0a, // Text:8
         0x63, // Text:8
       ])
-      expect(() => { ecodeDecoder.decode(ecode) }).to.throw(Error, 'Illegal locale ID 15')
+      expect(() => { ecodeDecoder.decodeV1(ecode) }).to.throw(Error, 'Illegal locale ID 15')
     })
 
     it('should fail to decode due to illegal align ID', () => {
@@ -99,7 +96,7 @@ describe('EcodeDecoder', () => {
         0x0a, // Text:8
         0x63, // Text:8
       ])
-      expect(() => { ecodeDecoder.decode(ecode) }).to.throw(Error, 'Illegal align ID 3')
+      expect(() => { ecodeDecoder.decodeV1(ecode) }).to.throw(Error, 'Illegal align ID 3')
     })
 
     it('should fail to decode due to illegal size ID', () => {
@@ -122,7 +119,7 @@ describe('EcodeDecoder', () => {
         0x0a, // Text:8
         0x63, // Text:8
       ])
-      expect(() => { ecodeDecoder.decode(ecode) }).to.throw(Error, 'Illegal size ID 15')
+      expect(() => { ecodeDecoder.decodeV1(ecode) }).to.throw(Error, 'Illegal size ID 15')
     })
 
     it('should fail to decode due to illegal format ID', () => {
@@ -145,7 +142,7 @@ describe('EcodeDecoder', () => {
         0x0a, // Text:8
         0x63, // Text:8
       ])
-      expect(() => { ecodeDecoder.decode(ecode) }).to.throw(Error, 'Illegal format ID 15')
+      expect(() => { ecodeDecoder.decodeV1(ecode) }).to.throw(Error, 'Illegal format ID 15')
     })
   })
 })

@@ -22,6 +22,21 @@ $ npm install @emoji-gen/ecode --save # for NPM users
 ```
 
 ## Usage
+### EcodeEncoder
+
+```js
+const { EcodeEncoder } = require('@emoji-gen/ecode')
+
+const ecodeEncoder = new EcodeEncoder()
+const ecode = ecodeDecoder.encode({
+
+})
+
+console.log(ecode)
+// =>
+```
+
+### EcodeDecoder
 
 ```js
 const { EcodeDecoder } = require('@emoji-gen/ecode')
@@ -32,18 +47,12 @@ const ecode = ecodeDecoder.decode('BA0hzxI0VniavN7wYWIKYw')
 console.log(ecode)
 // => {
 //      version: 1,
-//      locale: {
-//        id: 4,
-//        name: 'en',
-//      },
+//      locale: 'en',
 //      flags: {
 //         sizeFixed: false,
 //         stretch: true
 //      },
-//      align: {
-//        id: 1,
-//        name: 'center',
-//      },
+//      align: 'center',
 //      size: 'xhdpi',
 //      format: 'WebP',
 //      fontId: 207,
