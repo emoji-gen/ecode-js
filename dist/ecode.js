@@ -182,7 +182,7 @@
 
   var TextEncoderLite = textEncoderLite.TextEncoderLite;
   var V1_HEADER_LENGTH = 12;
-  var LOCALE_TO_LOCALE_ID = {
+  var LOCALE_NAME_TO_LOCALE_ID = {
     ja: 0,
     kr: 1,
     'zh-hant': 2,
@@ -210,25 +210,25 @@
   function () {
     function EcodeEncoder() {
       _classCallCheck(this, EcodeEncoder);
-
-      this.textEncoder = new TextEncoderLite();
     }
 
     _createClass(EcodeEncoder, [{
       key: "encodeV1",
       value: function encodeV1(ecode) {
-        var encodedText = this.textEncoder.encode(ecode.text);
+        var text = ecode.text || '';
+        var textEncoder = new TextEncoderLite();
+        var encodedText = textEncoder.encode(text);
 
         if (encodedText.length === 0) {
           throw new Error('empty string is not allowed');
         }
 
         var buffer = new Uint8Array(V1_HEADER_LENGTH + encodedText.length);
-        var locale = ecode.locale || 'ja';
-        var localeId = LOCALE_TO_LOCALE_ID[locale.toLowerCase()];
+        var localeName = ecode.locale || 'ja';
+        var localeId = LOCALE_NAME_TO_LOCALE_ID[localeName.toLowerCase()];
 
         if (typeof localeId !== 'number') {
-          throw new Error('Illegal locale `' + ecode.locale + '`');
+          throw new Error('Illegal locale name : ' + ecode.locale);
         }
 
         buffer[0] |= localeId & 0x0f;
@@ -236,27 +236,27 @@
         var flags = this._encodeFlagsV1(ecode.flags);
 
         buffer[1] |= flags << 2 & 0xfc;
-        var align = ecode.align || 'left';
-        var alignId = ALIGN_TO_ALIGN_ID[align.toLowerCase()];
+        var alignName = ecode.align || 'left';
+        var alignId = ALIGN_TO_ALIGN_ID[alignName.toLowerCase()];
 
-        if (typeof localeId !== 'number') {
-          throw new Error('Illegal locale `' + ecode.align + '`');
+        if (typeof alignId !== 'number') {
+          throw new Error('Illegal align name : ' + ecode.align);
         }
 
         buffer[1] |= alignId & 0x03;
-        var size = ecode.size || 'mdpi';
-        var sizeId = SIZE_TO_ID[size.toLowerCase()];
+        var sizeName = ecode.size || 'mdpi';
+        var sizeId = SIZE_TO_ID[sizeName.toLowerCase()];
 
         if (typeof sizeId !== 'number') {
-          throw new Error('Illegal size `' + ecode.size + '`');
+          throw new Error('Illegal size name : ' + ecode.size);
         }
 
         buffer[2] |= sizeId << 4 & 0xf0;
-        var format = ecode.format || 'png';
-        var formatId = FORMAT_TO_ID[format.toLowerCase()];
+        var formatName = ecode.format || 'png';
+        var formatId = FORMAT_TO_ID[formatName.toLowerCase()];
 
         if (typeof formatId !== 'number') {
-          throw new Error('Illegal format `' + ecode.format + '`');
+          throw new Error('Illegal format name : ' + ecode.format);
         }
 
         buffer[2] |= formatId & 0x0f;
@@ -359,8 +359,8 @@
     }
 
     _createClass(EcodeDecoder, [{
-      key: "decode",
-      value: function decode(ecode) {
+      key: "decodeV1",
+      value: function decodeV1(ecode) {
         var buffer = base64.decode(ecode);
 
         if (buffer.length <= V1_HEADER_LENGTH$1) {
@@ -419,19 +419,10 @@
 
         return {
           version: version,
-          locale: {
-            id: localeId,
-            name: localeName
-          },
+          locale: localeName,
           flags: flags,
-          align: {
-            id: alignId,
-            name: alignName
-          },
-          size: {
-            id: sizeId,
-            name: sizeName
-          },
+          align: alignName,
+          size: sizeName,
           format: {
             id: formatId,
             name: formatName

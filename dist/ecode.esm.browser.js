@@ -179,7 +179,7 @@ const { TextEncoderLite } = textEncoderLite;
 
 
 const V1_HEADER_LENGTH = 12;
-const LOCALE_TO_LOCALE_ID = {
+const LOCALE_NAME_TO_LOCALE_ID = {
   ja: 0,
   kr: 1,
   'zh-hant': 2,
@@ -204,45 +204,43 @@ const FORMAT_TO_ID = {
 
 
 class EcodeEncoder {
-  constructor() {
-    this.textEncoder = new TextEncoderLite();
-  }
-
   encodeV1(ecode) {
-    const encodedText = this.textEncoder.encode(ecode.text);
+    const text = ecode.text || '';
+    const textEncoder = new TextEncoderLite();
+    const encodedText = textEncoder.encode(text);
     if (encodedText.length === 0) {
       throw new Error('empty string is not allowed')
     }
 
     const buffer = new Uint8Array(V1_HEADER_LENGTH + encodedText.length);
-    const locale = ecode.locale || 'ja';
-    const localeId = LOCALE_TO_LOCALE_ID[locale.toLowerCase()];
+    const localeName = ecode.locale || 'ja';
+    const localeId = LOCALE_NAME_TO_LOCALE_ID[localeName.toLowerCase()];
     if (typeof localeId !== 'number') {
-      throw new Error('Illegal locale `' + ecode.locale + '`')
+      throw new Error('Illegal locale name : ' + ecode.locale)
     }
     buffer[0] |= localeId & 0x0f;
 
     const flags = this._encodeFlagsV1(ecode.flags);
     buffer[1] |= flags << 2 & 0xfc;
 
-    const align = ecode.align || 'left';
-    const alignId = ALIGN_TO_ALIGN_ID[align.toLowerCase()];
-    if (typeof localeId !== 'number') {
-      throw new Error('Illegal locale `' + ecode.align + '`')
+    const alignName = ecode.align || 'left';
+    const alignId = ALIGN_TO_ALIGN_ID[alignName.toLowerCase()];
+    if (typeof alignId !== 'number') {
+      throw new Error('Illegal align name : ' + ecode.align)
     }
     buffer[1] |= alignId & 0x03;
 
-    const size = ecode.size || 'mdpi';
-    const sizeId = SIZE_TO_ID[size.toLowerCase()];
+    const sizeName = ecode.size || 'mdpi';
+    const sizeId = SIZE_TO_ID[sizeName.toLowerCase()];
     if (typeof sizeId !== 'number') {
-      throw new Error('Illegal size `' + ecode.size + '`')
+      throw new Error('Illegal size name : ' + ecode.size)
     }
     buffer[2] |= sizeId << 4 & 0xf0;
 
-    const format = ecode.format || 'png';
-    const formatId = FORMAT_TO_ID[format.toLowerCase()];
+    const formatName = ecode.format || 'png';
+    const formatId = FORMAT_TO_ID[formatName.toLowerCase()];
     if (typeof formatId !== 'number') {
-      throw new Error('Illegal format `' + ecode.format + '`')
+      throw new Error('Illegal format name : ' + ecode.format)
     }
     buffer[2] |= formatId & 0x0f;
 
@@ -332,7 +330,7 @@ class EcodeDecoder {
     this.textDecoder = new TextDecoderLite();
   }
 
-  decode(ecode) {
+  decodeV1(ecode) {
     const buffer = base64.decode(ecode);
     if (buffer.length <= V1_HEADER_LENGTH$1) {
       throw new Error('Illegal byte length ' + buffer.length)
@@ -390,19 +388,10 @@ class EcodeDecoder {
 
     return {
       version,
-      locale: {
-        id: localeId,
-        name: localeName,
-      },
+      locale: localeName,
       flags,
-      align: {
-        id: alignId,
-        name: alignName,
-      },
-      size: {
-        id: sizeId,
-        name: sizeName,
-      },
+      align: alignName,
+      size: sizeName,
       format: {
         id: formatId,
         name: formatName,
