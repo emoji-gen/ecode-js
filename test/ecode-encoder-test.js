@@ -8,9 +8,7 @@ const base64 = require('../lib/base64')
 describe('EcodeEncoder', () => {
   describe('encodeV1', () => {
     const TEMPLATE = {
-      locale: {
-        name: 'en',
-      },
+      locale: 'en',
       flags: {
         sizeFixed: true,
         stretch: true,
@@ -29,9 +27,7 @@ describe('EcodeEncoder', () => {
     it('should encode ecode', () => {
       const ecodeEncoder = new EcodeEncoder()
       const ecode = ecodeEncoder.encodeV1({
-        locale: {
-          name: 'en',
-        },
+        locale: 'en',
         flags: {
           sizeFixed: true,
           stretch: true,
@@ -73,23 +69,19 @@ describe('EcodeEncoder', () => {
       expect(() => {
         ecodeEncoder.encodeV1(
           assign({}, TEMPLATE, {
-            locale: {
-              name: 'XXX',
-            },
+            locale: 'XXX',
           }))
       }).to.throw(Error, 'Illegal locale name : XXX')
     })
 
-    it('should fail to encode ecode due to illegal locale name', () => {
+    it('should fail to encode ecode due to illegal align name', () => {
       const ecodeEncoder = new EcodeEncoder()
       expect(() => {
         ecodeEncoder.encodeV1(
           assign({}, TEMPLATE, {
-            locale: {
-              name: 'XXX',
-            },
+           align: 'XXX',
           }))
-      }).to.throw(Error, 'Illegal locale name : XXX')
+      }).to.throw(Error, 'Illegal align name : XXX')
     })
   })
 })
