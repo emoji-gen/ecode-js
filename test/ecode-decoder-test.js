@@ -16,8 +16,10 @@ describe('EcodeDecoder', () => {
       expect(ecode.flags.stretch).to.be.true;
       expect(ecode.align.id).to.equal(1)
       expect(ecode.align.name).to.equal('center')
-      expect(ecode.size).to.equal('xhdpi')
-      expect(ecode.format).to.equal('WebP')
+      expect(ecode.size.id).to.equal(2)
+      expect(ecode.size.name).to.equal('xhdpi')
+      expect(ecode.format.id).to.equal(1)
+      expect(ecode.format.name).to.equal('WebP')
       expect(ecode.fontId).to.equal(0xcf)
       expect(ecode.foregroundColor.value).to.equal(0x12345678)
       expect(ecode.foregroundColor.hex).to.equal('12345678')
@@ -98,6 +100,52 @@ describe('EcodeDecoder', () => {
         0x63, // Text:8
       ])
       expect(() => { ecodeDecoder.decode(ecode) }).to.throw(Error, 'Illegal align ID 3')
+    })
+
+    it('should fail to decode due to illegal size ID', () => {
+      const ecodeDecoder = new EcodeDecoder()
+      const ecode = base64.encode([
+        0x04, // Version:4, Locale:4
+        0x0d, // Flags:6, Align:2
+        0xf1, // Size:4, Format:4
+        0xcf, // FontId:8
+        0x12, // ForegroundColor_R:8
+        0x34, // ForegroundColor_G:8
+        0x56, // ForegroundColor_B:8
+        0x78, // ForegroundColor_A:8
+        0x9a, // BackgroundColor_R:8
+        0xbc, // BackgroundColor_G:8
+        0xde, // BackgroundColor_B:8
+        0xf0, // BackgroundColor_A:8
+        0x61, // Text:8
+        0x62, // Text:8
+        0x0a, // Text:8
+        0x63, // Text:8
+      ])
+      expect(() => { ecodeDecoder.decode(ecode) }).to.throw(Error, 'Illegal size ID 15')
+    })
+
+    it('should fail to decode due to illegal format ID', () => {
+      const ecodeDecoder = new EcodeDecoder()
+      const ecode = base64.encode([
+        0x04, // Version:4, Locale:4
+        0x0d, // Flags:6, Align:2
+        0x2f, // Size:4, Format:4
+        0xcf, // FontId:8
+        0x12, // ForegroundColor_R:8
+        0x34, // ForegroundColor_G:8
+        0x56, // ForegroundColor_B:8
+        0x78, // ForegroundColor_A:8
+        0x9a, // BackgroundColor_R:8
+        0xbc, // BackgroundColor_G:8
+        0xde, // BackgroundColor_B:8
+        0xf0, // BackgroundColor_A:8
+        0x61, // Text:8
+        0x62, // Text:8
+        0x0a, // Text:8
+        0x63, // Text:8
+      ])
+      expect(() => { ecodeDecoder.decode(ecode) }).to.throw(Error, 'Illegal format ID 15')
     })
   })
 })
