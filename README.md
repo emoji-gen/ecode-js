@@ -40,7 +40,10 @@ console.log(ecode)
 //         sizeFixed: false,
 //         stretch: true
 //      },
-//      align: 'center',
+//      align: {
+//        id: 1,
+//        name: 'center',
+//      },
 //      size: 'xhdpi',
 //      format: 'WebP',
 //      fontId: 207,

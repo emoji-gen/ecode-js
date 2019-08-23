@@ -14,7 +14,8 @@ describe('EcodeDecoder', () => {
       expect(ecode.locale.name).to.equal('en')
       expect(ecode.flags.sizeFixed).to.be.true;
       expect(ecode.flags.stretch).to.be.true;
-      expect(ecode.align).to.equal('center')
+      expect(ecode.align.id).to.equal(1)
+      expect(ecode.align.name).to.equal('center')
       expect(ecode.size).to.equal('xhdpi')
       expect(ecode.format).to.equal('WebP')
       expect(ecode.fontId).to.equal(0xcf)
@@ -24,10 +25,12 @@ describe('EcodeDecoder', () => {
       expect(ecode.backgroundColor.hex).to.equal('9abcdef0')
       expect(ecode.text).to.equal('ab\nc')
     })
+
     it('should fail to decode due to illegal length', () => {
       const ecodeDecoder = new EcodeDecoder()
       expect(() => { ecodeDecoder.decode('') }).to.throw(Error, 'Illegal byte length 0')
     })
+
     it('should fail to decode due to illegal version', () => {
       const ecodeDecoder = new EcodeDecoder()
       const ecode = base64.encode([
@@ -50,6 +53,7 @@ describe('EcodeDecoder', () => {
       ])
       expect(() => { ecodeDecoder.decode(ecode) }).to.throw(Error, 'Illegal version 16')
     })
+
     it('should fail to decode due to illegal locale ID', () => {
       const ecodeDecoder = new EcodeDecoder()
       const ecode = base64.encode([
@@ -72,6 +76,7 @@ describe('EcodeDecoder', () => {
       ])
       expect(() => { ecodeDecoder.decode(ecode) }).to.throw(Error, 'Illegal locale ID 15')
     })
+
     it('should fail to decode due to illegal align ID', () => {
       const ecodeDecoder = new EcodeDecoder()
       const ecode = base64.encode([
