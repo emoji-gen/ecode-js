@@ -107,5 +107,15 @@ describe('EcodeEncoder', () => {
           }))
       }).to.throw(Error, 'Illegal size name : XXX')
     })
+
+    it('should fail to encode ecode due to illegal format name', () => {
+      const ecodeEncoder = new EcodeEncoder()
+      expect(() => {
+        ecodeEncoder.encodeV1(
+          assign({}, TEMPLATE, {
+           format: 'XXX',
+          }))
+      }).to.throw(Error, 'Illegal format name : XXX')
+    })
   })
 })
