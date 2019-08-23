@@ -117,5 +117,21 @@ describe('EcodeEncoder', () => {
           }))
       }).to.throw(Error, 'Illegal format name : XXX')
     })
+
+    it('should fail to encode ecode due to illegal font ID', () => {
+      const ecodeEncoder = new EcodeEncoder()
+      expect(() => {
+        ecodeEncoder.encodeV1(
+          assign({}, TEMPLATE, {
+           fontId: 0x0100,
+          }))
+      }).to.throw(Error, 'Illegal font ID : 256')
+      expect(() => {
+        ecodeEncoder.encodeV1(
+          assign({}, TEMPLATE, {
+           fontId: 'XXX',
+          }))
+      }).to.throw(Error, 'Illegal font ID : XXX')
+    })
   })
 })
