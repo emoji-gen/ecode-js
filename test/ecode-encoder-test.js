@@ -64,6 +64,22 @@ describe('EcodeEncoder', () => {
       ])
     })
 
+    it('should fail to encode ecode due to empty string', () => {
+      const ecodeEncoder = new EcodeEncoder()
+      expect(() => {
+        ecodeEncoder.encodeV1(
+          assign({}, TEMPLATE, {
+            text: '',
+          }))
+      }).to.throw(Error, 'empty string is not allowed')
+      expect(() => {
+        ecodeEncoder.encodeV1(
+          assign({}, TEMPLATE, {
+            text: null,
+          }))
+      }).to.throw(Error, 'empty string is not allowed')
+    })
+
     it('should fail to encode ecode due to illegal locale name', () => {
       const ecodeEncoder = new EcodeEncoder()
       expect(() => {
