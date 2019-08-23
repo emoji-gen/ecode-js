@@ -1,6 +1,7 @@
 'use strict'
 
 const { expect } = require('chai')
+const assign = require('lodash.assign')
 const { EcodeEncoder } = require('../index')
 const base64 = require('../lib/base64')
 
@@ -71,7 +72,7 @@ describe('EcodeEncoder', () => {
       const ecodeEncoder = new EcodeEncoder()
       expect(() => {
         ecodeEncoder.encodeV1(
-          Object.assign({}, TEMPLATE, {
+          assign({}, TEMPLATE, {
             locale: {
               name: 'XXX',
             },
@@ -83,7 +84,7 @@ describe('EcodeEncoder', () => {
       const ecodeEncoder = new EcodeEncoder()
       expect(() => {
         ecodeEncoder.encodeV1(
-          Object.assign({}, TEMPLATE, {
+          assign({}, TEMPLATE, {
             locale: {
               name: 'XXX',
             },
