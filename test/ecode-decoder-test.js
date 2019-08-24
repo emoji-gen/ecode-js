@@ -15,8 +15,7 @@ describe('EcodeDecoder', () => {
       expect(ecode.flags.stretch).to.be.true;
       expect(ecode.align).to.equal('center')
       expect(ecode.size).to.equal('xhdpi')
-      expect(ecode.format.id).to.equal(1)
-      expect(ecode.format.name).to.equal('WebP')
+      expect(ecode.format).to.equal('webp')
       expect(ecode.fontId).to.equal(0xcf)
       expect(ecode.foregroundColor.value).to.equal(0x12345678)
       expect(ecode.foregroundColor.hex).to.equal('12345678')
