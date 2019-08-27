@@ -17,8 +17,12 @@ describe('EcodeEncoder', () => {
       size: 'xhdpi',
       format: 'webp',
       fontId: 0xcf,
-      foregroundColor: 0x12345678,
-      backgroundColor: 0x9abcdef0,
+      foregroundColor: {
+        value: 0x12345678,
+      },
+      backgroundColor: {
+        value: 0x9abcdef0,
+      },
       text: 'ab\nc',
     }
 
@@ -34,8 +38,12 @@ describe('EcodeEncoder', () => {
         size: 'xhdpi',
         format: 'webp',
         fontId: 0xcf,
-        foregroundColor: 0x12345678,
-        backgroundColor: 0x9abcdef0,
+        foregroundColor: {
+          value: 0x12345678,
+        },
+        backgroundColor: {
+          value: 0x9abcdef0,
+        },
         text: 'ab\nc',
       })
 
