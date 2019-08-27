@@ -54,7 +54,7 @@ console.log(ecode)
 //      },
 //      align: 'center',
 //      size: 'xhdpi',
-//      format: 'WebP',
+//      format: 'webp',
 //      fontId: 207,
 //      foregroundColor: {
 //        value: 305419896,
