@@ -96,5 +96,12 @@ $ yarn test
 $ yarn run build
 ```
 
+## Ported projects
+
+|Name|Language|
+|----|--------|
+|[ecode-js](https://github.com/emoji-gen/ecode-js)|JavaScript|
+|[ecode-java](https://github.com/emoji-gen/ecode-java)|Java|
+
 ## License
 MIT &copy; [Emoji Generator](https://emoji-gen.ninja)
