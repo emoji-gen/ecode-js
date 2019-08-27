@@ -29,11 +29,26 @@ const { EcodeEncoder } = require('@emoji-gen/ecode')
 
 const ecodeEncoder = new EcodeEncoder()
 const ecode = ecodeDecoder.encode({
-
+  locale: 'en',
+  flags: {
+    sizeFixed: true,
+    stretch: true,
+  },
+  align: 'center',
+  size: 'xhdpi',
+  format: 'webp',
+  fontId: 0xcf,
+  foregroundColor: {
+    value: 0x12345678,
+  },
+  backgroundColor: {
+    value: 0x9abcdef0,
+  },
+  text: 'ab\nc',
 })
 
 console.log(ecode)
-// =>
+// => 'BA0hzxI0VniavN7wYWIKYw'
 ```
 
 ### EcodeDecoder
