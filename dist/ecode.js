@@ -169,9 +169,9 @@
   };
   var decode = // String -> Uint8Array
   typeof window !== 'undefined' && window.atob === 'function' ? function (encodedData) {
-    return Uint8Array.from(window.atob(encodedData), function (v) {
+    return new Uint8Array(Array.prototype.map.call(window.atob(encodedData), function (v) {
       return v.charCodeAt(0);
-    });
+    }));
   } : function (encodedData) {
     return new Uint8Array(Buffer.from(encodedData, 'base64'));
   };
@@ -261,21 +261,17 @@
 
         buffer[2] |= formatId & 0x0f;
 
-        if (typeof ecode.fontId !== 'number') {
-          throw new Error('Illegal font ID `' + ecode.fontId + '`');
+        if (typeof ecode.fontId !== 'number' || ecode.fontId & 0xffffff00) {
+          throw new Error('Illegal font ID : ' + ecode.fontId);
         }
 
         buffer[3] |= ecode.fontId & 0xff;
-
-        var foregroundColor = this._encodeColorV1(ecode.foregroundColor, 0x000000FF);
-
+        var foregroundColor = this._encodeColorV1(ecode.foregroundColor) || 0x000000FF;
         buffer[4] |= foregroundColor >>> 24 & 0xff;
         buffer[5] |= foregroundColor >>> 16 & 0xff;
         buffer[6] |= foregroundColor >>> 8 & 0xff;
         buffer[7] |= foregroundColor & 0xff;
-
-        var backgroundColor = this._encodeColorV1(ecode.backgroundColor, 0xFFFFFF00);
-
+        var backgroundColor = this._encodeColorV1(ecode.backgroundColor) || 0xFFFFFF00;
         buffer[8] |= backgroundColor >>> 24 & 0xff;
         buffer[9] |= backgroundColor >>> 16 & 0xff;
         buffer[10] |= backgroundColor >>> 8 & 0xff;
@@ -306,16 +302,24 @@
       }
     }, {
       key: "_encodeColorV1",
-      value: function _encodeColorV1(color, defaultColor) {
-        if (typeof color === 'number') {
-          return color;
-        } else if (typeof color === 'string') {
-          return parseInt(color.replace(/^#/, ''), 16);
-        } else if (!color) {
-          return defaultColor;
+      value: function _encodeColorV1(colorOpt) {
+        var color = colorOpt || {};
+
+        if (color.value) {
+          if (typeof color.value !== 'number') {
+            throw new Error('`value` should be number : ' + color);
+          }
+
+          return color.value;
         }
 
-        throw new Error('Illegal color format `' + color + '`');
+        if (color.hex) {
+          if (typeof color.hex !== 'string') {
+            throw new Error('`hex` should be string : ' + color.hex);
+          }
+
+          return parseInt(color.replace(/^#/, ''), 16);
+        }
       }
     }]);
 
@@ -345,8 +349,8 @@
     3: 'xxhdpi'
   };
   var FORMAT_ID_TO_FORMAT_NAME = {
-    0: 'PNG',
-    1: 'WebP'
+    0: 'png',
+    1: 'webp'
   };
 
   var EcodeDecoder =
@@ -423,10 +427,7 @@
           flags: flags,
           align: alignName,
           size: sizeName,
-          format: {
-            id: formatId,
-            name: formatName
-          },
+          format: formatName,
           fontId: fontId,
           foregroundColor: {
             value: foregroundColor,
