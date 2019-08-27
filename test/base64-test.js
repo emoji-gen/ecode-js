@@ -6,7 +6,7 @@ const base64 = require('../lib/base64')
 describe('base64', () => {
   describe('decode', () => {
     it('should encode text', () => {
-      expect(base64.encode(Uint8Array.from([ 0x61, 0x62, 0x63 ]))).to.equal('YWJj')
+      expect(base64.encode(new Uint8Array([ 0x61, 0x62, 0x63 ]))).to.equal('YWJj')
       // expect(base64.encode(Uint8Array.from([ 0x31, 0x32, 0x33, 0x34, 0x35 ]))).to.equal('MTIzNDU')
       // expect(base64.encode(Uint8Array.from([ 0x7e, 0x7e, 0x7e, 0x7e ]))).to.equal('fn5-fg')
     })
