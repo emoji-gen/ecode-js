@@ -44,6 +44,9 @@
     "rollup-plugin-terser": "^5.1.1",
     "webpack": "^4.39.2"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Emoji Generator <ultimate.emoji.gen@gmail.com>",
   "repository": "https://github.com/emoji-gen/ecode-js.git",
   "license": "MIT"
