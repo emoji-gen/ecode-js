@@ -1,24 +1,15 @@
-language: node_js
 matrix:
   include:
     - os: linux
       dist: bionic
-      node_js: 10
-    - os: linux
-      dist: bionic
-      node_js: 12
-    - os: linux
-      dist: bionic
-      node_js: stable
     - os: osx
       osx_image: xcode11
-      node_js: 10
-    - os: osx
-      osx_image: xcode11
-      node_js: 12
-    - os: osx
-      osx_image: xcode11
-      node_js: stable
+
+language: node_js
+node_js:
+  - 10
+  - 12
+  - stable
 
 script:
   - travis_retry npm test
