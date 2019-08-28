@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/gh/emoji-gen/ecode-js/branch/master/graph/badge.svg)](https://codecov.io/gh/emoji-gen/ecode-js)
 [![License](https://img.shields.io/static/v1?label=License&message=MIT&color=green)](https://opensource.org/licenses/MIT)
 
-> :musical_score: The emoji code utilities for JavaScript
+:musical_score: The emoji code utilities for JavaScript
 
 
 ## Requirements
