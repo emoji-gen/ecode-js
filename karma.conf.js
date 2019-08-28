@@ -32,7 +32,9 @@ module.exports = function(config) {
         extensions: ['.js', '.json'],
       },
     },
-    browsers: [ process.env.APPVEYOR ? 'IE' : 'ChromeHeadless' ],
+    browsers: [
+      process.env.APPVEYOR ? 'IE' :
+      process.env.TRAVIS_OS_NAME === 'osx' ? 'Safari' : 'ChromeHeadless' ],
     singleRun: true,
     concurrency: 1,
   })
