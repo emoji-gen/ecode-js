@@ -1,4 +1,10 @@
-dist: bionic
+matrix:
+  include:
+    - os: linux
+      dist: bionic
+    - os: osx
+      osx_image: xcode11
+
 language: node_js
 node_js:
   - 10
